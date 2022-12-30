@@ -75,7 +75,7 @@ nav {
 }
 
 nav a {
-  color: var(--heading-color);
+  color: var(--anchor-color);
   text-decoration: none;
   margin-right: 25px;
   cursor: pointer;
