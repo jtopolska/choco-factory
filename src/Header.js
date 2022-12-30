@@ -1,6 +1,5 @@
 import { useState } from "react";
 import data from './data.js';
-// import emptyData from './emptyData.js';
 import { FaShoppingBasket } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 
@@ -12,17 +11,15 @@ function HeaderAndItems() {
 
     const addToOrder = (el) => {
         let itemExist = false;
-        // перебираємо масив. якщо обирається товар, який уже є у корзині, то він не додається до корзини
         order.forEach(element => {
             if (element.id === el.id) {
                 itemExist = true;
             }
         })
-        // якщо товару в корзині ще не існує(itemExist = false), то додаємо його
+        
         if (!itemExist) {
             let addItem = order;
             addItem.push(el);
-            // якщо записати все одним рядком, то з другим натисканням на кнопку буде помилка, що order is not itterable
             setOrder(addItem);
         }
     }
@@ -33,11 +30,6 @@ function HeaderAndItems() {
     }
 
     const showBinItem = () => {
-        // let total = 0;
-        // Метод Number.parseFloat() разбирает строковый аргумент и возвращает число
-        // order.forEach(cost => total += Number.parseFloat(cost.price));
-        // order.forEach(cost => total += +cost.price);
-        // або такий спосіб:
         let total = order.reduce((sum, current) => sum + Number(current.price), 0);
 
         return (
@@ -64,10 +56,8 @@ function HeaderAndItems() {
                 <a className="logo" href="./public/index.html">Chocolate Factory</a>
                 <a href="#about">About</a>
                 <a href="#contacts">Contacts</a>
-                {/* ставимо обробник події на іконку корзини, та змінюємо початковий стан на протилежний. Якщо початковий стан true, то буде присвоюватись клас active до існуючого(запис з доларом та дужками це забезпечує) */}
                 <FaShoppingBasket onClick={ () => setOpenBin(!openBin) } className={`btn-bin ${openBin && 'active'}`}/>
                 <p className={`${openBin && 'order-quantity'}`}>{ openBin && order.length }</p>
-                {/* Тепер коли openBin буде true - відображаємо вміст корзини */}
                 {openBin && (
                     <div className="bin">
                         {order.length > 0 ? showBinItem() : 'Cart is empty'}
